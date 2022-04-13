@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ATM {
     private static AccountDatabase accountDatabase = new AccountDatabase();
@@ -36,10 +38,23 @@ public class ATM {
     public static int getLoginInput(int inputLength) {
         String inputType = inputLength == 8 ? "ID" : "PIN";
 
-        System.out.printf("Enter your %s: ", inputType);
+        System.out.printf("Enter your %s: ", inputType);;
         String userInput = scanner.nextLine();
 
+        while (!isValidInput(userInput, inputLength)) {
+            System.out.printf("Invalid %s (Must be %d digits). Try again: ", inputType, inputLength);
+            userInput = scanner.nextLine();
+        }
+
         return Integer.parseInt(userInput);
+    }
+
+    public static boolean isValidInput(String userInput, int inputLength) {
+        String REGEX = "\\d{" + inputLength + "}";
+        Pattern pattern = Pattern.compile(REGEX);
+        Matcher matcher = pattern.matcher(userInput);
+
+        return matcher.matches();
     }
 
 
