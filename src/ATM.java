@@ -111,11 +111,11 @@ public class ATM {
         String userDepositAmount = scanner.nextLine();
 
         while (!isValidTransactionAmount(userDepositAmount)) {
-            System.out.println("Please enter a valid amount.");
+            System.out.println("Please enter a valid amount. ($1 to $1000)");
             userDepositAmount = scanner.nextLine();
         }
 
-        System.out.println("Depositing " + userDepositAmount);
+        System.out.println("\nDepositing " + userDepositAmount);
     }
 
     public static void withdraw() {
@@ -124,16 +124,18 @@ public class ATM {
         String userWithdrawAmount = scanner.nextLine();
 
         while (!isValidTransactionAmount(userWithdrawAmount)) {
-            System.out.println("Please enter a valid amount.");
+            System.out.println("Please enter a valid amount. ($1 to $1000)");
             userWithdrawAmount = scanner.nextLine();
         }
 
-        System.out.println("Withdrawing " + userWithdrawAmount);
+        System.out.println("\nWithdrawing " + userWithdrawAmount);
     }
 
-    // Validate the input so that users can only deposit/withdraw from $1 up to $1000
+    /* Determines if a requested transaction amount is valid.
+     *  Transactions are limited to anything above $1.00 and under or equal to $1,000 ($0.00 - $1000)
+     *  Cent values are optional... E.G. entering 50 instead of 50.00 is valid. */
     public static boolean isValidTransactionAmount(String userTransactionAmount) {
-        String REGEX = "^([1-9][0-9]{0,2}|1000)$";
+        String REGEX = "^[1-9]$|^[1-9][0-9]{0,2}(?:[.][0-9]{2})?|1000";
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(userTransactionAmount);
 
