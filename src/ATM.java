@@ -95,7 +95,7 @@ public class ATM {
 
         switch(userSelection) {
             case 1:
-                System.out.println("\nAccount Balance\nYour balance is: " + currentUser.getAccountBalance());
+                System.out.println("\nAccount Balance\nYour balance is: $" + currentUser.getAccountBalance());
                 continuePrompt();
             case 2:
                 withdraw();
@@ -106,7 +106,7 @@ public class ATM {
             case 4:
                 logout();
             default:
-                System.out.println("\nPlease enter a valid selection");
+                System.out.println("Please enter a valid selection.");
                 mainMenu();
         }
     }
@@ -147,6 +147,7 @@ public class ATM {
 
         System.out.println("\nWithdrawing " + userWithdrawAmount);
         currentUser.withdrawFunds(new BigDecimal(userWithdrawAmount));
+        accountDatabase.updateDatabase(currentUser.name, currentUser.id, currentUser.pin, currentUser.balance);
     }
 
     /* Determines if a requested transaction amount is valid.
