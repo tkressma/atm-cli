@@ -97,15 +97,12 @@ public class ATM {
             case 1:
                 System.out.println("\nAccount Balance\nYour balance is: " + currentUser.getAccountBalance());
                 continuePrompt();
-                break;
             case 2:
                 withdraw();
                 continuePrompt();
-                break;
             case 3:
                 deposit();
                 continuePrompt();
-                break;
             case 4:
                 logout();
             default:
@@ -114,6 +111,8 @@ public class ATM {
         }
     }
 
+    /* Asks user for how much they want to deposit, validates their input
+    *  and then deposits the amount into their account. */
     public static void deposit() {
         System.out.println("\nDeposit funds into your account.\n");
         System.out.println("How much would you like to deposit?");
@@ -128,6 +127,9 @@ public class ATM {
         currentUser.depositFunds(new BigDecimal(userDepositAmount));
     }
 
+    /* Asks user for how much they want to withdraw, validates their input
+    *  to ensure they have enough funds in the account to take out the requested
+    *  amount, and if so, takes the funds from their account. */
     public static void withdraw() {
         System.out.println("\nWithdraw funds from your account.\n");
         System.out.println("How much would you like to withdraw?");
