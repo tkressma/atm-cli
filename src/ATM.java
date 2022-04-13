@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class ATM {
     private static AccountDatabase accountDatabase = new AccountDatabase();
     private static Scanner scanner = new Scanner(System.in);
+    private static Account currentUser;
 
     public static void main(String[] args) {
         start();
@@ -14,15 +15,16 @@ public class ATM {
     }
 
     public static void login() {
-        int acctId = getLoginInput(8);
-        int acctPin = getLoginInput(4);
+        int accountId = getLoginInput(8);
+        int accountPin = getLoginInput(4);
 
-        while (!accountDatabase.authenticateUser(acctId, acctPin)) {
+        while (!accountDatabase.authenticateUser(accountId, accountPin)) {
             System.out.println("\nInvalid Credentials. Please re-enter your account ID and Pin.\n");
-            acctId = getLoginInput(8);
-            acctPin = getLoginInput(4);
+            accountId = getLoginInput(8);
+            accountPin = getLoginInput(4);
         }
-        
+
+        currentUser = accountDatabase.getAccount(accountId);
     }
 
     public static int getLoginInput(int inputLength) {

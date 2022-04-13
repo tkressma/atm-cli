@@ -39,4 +39,8 @@ public class AccountDatabase {
     public boolean authenticateUser(int id, int pin) {
         return accounts.stream().anyMatch(account -> account.id == id && account.pin == pin);
     }
+
+    public Account getAccount(int id) {
+        return accounts.stream().filter(account -> account.id == id).findFirst().orElse(null);
+    }
 }
