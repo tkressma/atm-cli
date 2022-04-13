@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -116,6 +117,7 @@ public class ATM {
         }
 
         System.out.println("\nDepositing " + userDepositAmount);
+        currentUser.depositFunds(new BigDecimal(userDepositAmount));
     }
 
     public static void withdraw() {
@@ -129,6 +131,7 @@ public class ATM {
         }
 
         System.out.println("\nWithdrawing " + userWithdrawAmount);
+        currentUser.withdrawFunds(new BigDecimal(userWithdrawAmount));
     }
 
     /* Determines if a requested transaction amount is valid.

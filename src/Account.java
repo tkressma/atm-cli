@@ -20,4 +20,12 @@ public class Account {
     public BigDecimal getAccountBalance() {
         return this.balance;
     }
+
+    public void depositFunds(BigDecimal deposit) {
+        this.balance.add(deposit);
+    }
+
+    public void withdrawFunds(BigDecimal withdrawal) {
+        this.balance.add(withdrawal);
+    }
 }
