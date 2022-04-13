@@ -16,4 +16,8 @@ public class Account {
     public String getFirstName() {
         return this.name.split(" ")[0];
     }
+
+    public BigDecimal getAccountBalance() {
+        return this.balance;
+    }
 }

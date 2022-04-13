@@ -78,7 +78,11 @@ public class ATM {
             userSelection = scanner.nextLine();
         }
 
-        System.out.println(userSelection);
+        switch(Integer.parseInt(userSelection)) {
+            case 1:
+                System.out.println("\nAccount Balance\nYour balance is: " + currentUser.getAccountBalance());
+                break;
+        }
     }
 
 
