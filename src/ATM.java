@@ -16,7 +16,7 @@ public class ATM {
         login();
         // Once a user logs in, display the welcome message followed by the main menu.
         System.out.println("\nHello, " + currentUser.getFirstName() + "!");
-        // mainMenu();
+        mainMenu();
 
     }
 
@@ -62,6 +62,15 @@ public class ATM {
         Matcher matcher = pattern.matcher(userInput);
 
         return matcher.matches();
+    }
+
+    public static void mainMenu() {
+        System.out.println("\nEnter the number relating to the selection you would like to make:");
+        System.out.println("(1) - View Balance");
+        System.out.println("(2) - Withdraw Funds");
+        System.out.println("(3) - Deposit Funds");
+        System.out.println("(4) - Exit");
+
     }
 
 
