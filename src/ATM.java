@@ -14,6 +14,9 @@ public class ATM {
         login();
     }
 
+    /* Retrieve ID and PIN from the user. Validate the account information with the "database".
+     *  If the account is valid, "login" the current user by updating currentUser.
+     *  If the details provided are invalid, prompt the user to re-enter the ID and PIN. */
     public static void login() {
         int accountId = getLoginInput(8);
         int accountPin = getLoginInput(4);
@@ -27,6 +30,9 @@ public class ATM {
         currentUser = accountDatabase.getAccount(accountId);
     }
 
+    /* Retrieves account ID/PIN based on the input length provided.
+     *  If the input length is 8, then prompt the user for an ID.
+     *  If the input length is 4, then prompt the user for a PIN. */
     public static int getLoginInput(int inputLength) {
         String inputType = inputLength == 8 ? "ID" : "PIN";
 
