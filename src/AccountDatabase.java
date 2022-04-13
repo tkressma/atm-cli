@@ -4,14 +4,14 @@ import java.io.FileReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class CSVReader {
+public class AccountDatabase {
     static ArrayList<Account> accounts = new ArrayList<>();
     File database = new File("User_Database.csv");
 
     /* Generates an ArrayList of all the accounts in the "database"
      *  Utilizes BufferedReader to scan each line and dynamically create
      *  an account based off of the data. */
-    public CSVReader() {
+    public AccountDatabase() {
         try {
             String line;
             BufferedReader reader = new BufferedReader(new FileReader(database));

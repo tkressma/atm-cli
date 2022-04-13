@@ -1,5 +1,5 @@
 public class ATM {
-    private static CSVReader accountDatabase = new CSVReader();
+    private static AccountDatabase accountDatabase = new AccountDatabase();
 
     public static void main(String[] args) {
         start();
