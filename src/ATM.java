@@ -7,8 +7,12 @@ public class ATM {
 
     public static void start() {
         System.out.println("Good day! Please enter you account details to get started.");
-        // Implement Login
-        // Implement Menu after logging in
+        login();
+    }
+
+    public static void login() {
+        int acctId = 55555555;
+        int acctPin = 1234;
     }
 
 }
