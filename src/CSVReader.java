@@ -8,6 +8,9 @@ public class CSVReader {
     static ArrayList<Account> accounts = new ArrayList<>();
     File database = new File("User_Database.csv");
 
+    /* Generates an ArrayList of all the accounts in the "database"
+     *  Utilizes BufferedReader to scan each line and dynamically create
+     *  an account based off of the data. */
     public CSVReader() {
         try {
             String line;
@@ -15,6 +18,7 @@ public class CSVReader {
 
             while ((line = reader.readLine()) != null) {
                 if (!line.contains("AcctName")) {
+
                     String[] accountDetails = line.split(",");
 
                     String acctName = accountDetails[0];
@@ -25,8 +29,10 @@ public class CSVReader {
                     accounts.add(new Account(acctName, acctId, acctPin, acctBalance));
                 }
             }
+
+            reader.close();
         } catch (Exception e) {
-            System.out.println("Error loading file.");
+            System.out.println("File not found!");
         }
     }
 }
