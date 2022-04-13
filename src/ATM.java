@@ -53,6 +53,12 @@ public class ATM {
         return Integer.parseInt(userInput);
     }
 
+    public static void logout() {
+        System.out.println("\nThank you for using our bank. Have a wonderful day!\n");
+        currentUser = null;
+        start();
+    }
+
     /* Determines whether the user input is valid based on ID/PIN length.
      *  IF an ID is valid, it is strictly 8 digits.
      *  IF a PIN is valid, it is strictly 4 digits. */
@@ -74,7 +80,7 @@ public class ATM {
         String userSelection = scanner.nextLine();
 
         while (!isValidInput(userSelection, 1)) {
-            System.out.println("Please enter a valid selection.");
+            System.out.println("\nPlease enter a valid selection.");
             userSelection = scanner.nextLine();
         }
 
@@ -89,10 +95,9 @@ public class ATM {
                 System.out.println("Deposit");
                 break;
             case 4:
-                System.out.println("Logout");
-                break;
+                logout();
             default:
-                System.out.println("Please enter a valid selection");
+                System.out.println("\nPlease enter a valid selection");
                 mainMenu();
         }
     }
