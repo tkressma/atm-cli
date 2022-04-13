@@ -87,12 +87,15 @@ public class ATM {
         switch(Integer.parseInt(userSelection)) {
             case 1:
                 System.out.println("\nAccount Balance\nYour balance is: " + currentUser.getAccountBalance());
+                continuePrompt();
                 break;
             case 2:
-                System.out.println("Withdraw");
+                withdraw();
+                continuePrompt();
                 break;
             case 3:
                 deposit();
+                continuePrompt();
                 break;
             case 4:
                 logout();
@@ -135,6 +138,27 @@ public class ATM {
         Matcher matcher = pattern.matcher(userTransactionAmount);
 
         return matcher.matches();
+    }
+
+    public static void continuePrompt() {
+        System.out.println("\nWould you like to do anything else?\n(1) Yes\n(2) No");
+
+        String userSelection = scanner.nextLine();
+        while (!isValidInput(userSelection, 1)) {
+            System.out.println("\nPlease enter a valid selection.");
+            userSelection = scanner.nextLine();
+        }
+
+        switch(Integer.parseInt(userSelection)) {
+            case 1:
+                // Re authenticate user;
+            case 2:
+                logout();
+            default:
+                System.out.println("Please enter a valid selection.");
+                continuePrompt();
+        }
+
     }
 
 
