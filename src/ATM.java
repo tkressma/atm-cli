@@ -98,6 +98,14 @@ public class ATM {
                 System.out.println("\nAccount Balance\nYour balance is: $" + currentUser.getAccountBalance());
                 continuePrompt();
             case 2:
+                if (currentUser.balance.compareTo(new BigDecimal(0)) == -1) {
+                    System.out.println("\nYour account is overdrawn. You cannot withdraw funds at this time.");
+                    System.out.println("\nReturning to main menu...");
+                    mainMenu();
+                } else if (currentUser.balance.equals(new BigDecimal(0))) {
+                    System.out.println("\nYour current balance is $0. You cannot withdraw funds at this time.");
+                    mainMenu();
+                }
                 withdraw();
                 continuePrompt();
             case 3:
@@ -119,12 +127,13 @@ public class ATM {
         String userDepositAmount = scanner.nextLine();
 
         while (!isValidTransactionAmount(userDepositAmount)) {
-            System.out.println("Please enter a valid amount. ($1 to $1000)");
             userDepositAmount = scanner.nextLine();
         }
 
         System.out.println("\nDepositing " + userDepositAmount);
         currentUser.depositFunds(new BigDecimal(userDepositAmount));
+        accountDatabase.updateDatabase(currentUser.name, currentUser.id, currentUser.pin, currentUser.balance);
+        System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.balance.toString());
     }
 
     /* Asks user for how much they want to withdraw, validates their input
@@ -135,19 +144,21 @@ public class ATM {
         System.out.println("How much would you like to withdraw?");
         String userWithdrawAmount = scanner.nextLine();
 
+
         while (!isValidTransactionAmount(userWithdrawAmount)) {
-            System.out.println("Please enter a valid amount. ($1 to $1000)");
             userWithdrawAmount = scanner.nextLine();
+            while(!isValidWithdrawal(userWithdrawAmount)) {
+                System.out.printf("You do not have enough funds in your account to withdraw that amount. Please enter another number: ");
+                userWithdrawAmount = scanner.nextLine();
+            }
         }
 
-        while(!isValidWithdrawal(userWithdrawAmount)) {
-            System.out.printf("You do not have enough funds in your account to withdraw that amount. Please enter another number: ");
-            userWithdrawAmount = scanner.nextLine();
-        }
+
 
         System.out.println("\nWithdrawing " + userWithdrawAmount);
         currentUser.withdrawFunds(new BigDecimal(userWithdrawAmount));
         accountDatabase.updateDatabase(currentUser.name, currentUser.id, currentUser.pin, currentUser.balance);
+        System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.balance.toString());
     }
 
     /* Determines if a requested transaction amount is valid.
@@ -157,6 +168,11 @@ public class ATM {
         String REGEX = "^[1-9]$|^[1-9][0-9]{0,2}(?:[.][0-9]{2})?|1000";
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(userTransactionAmount);
+
+        if (matcher.matches() == false) {
+            System.out.printf("Please enter a valid deposit amount. ");
+            System.out.println("All transactions are limited to anything above $1.00 and under $1,000.");
+        }
 
         return matcher.matches();
     }

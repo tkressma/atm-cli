@@ -1,5 +1,5 @@
 AcctName,AcctID,AcctPIN,AcctBalance
-Bill Dollar,55555555,1234,0.44675
+Bill Dollar,55555555,1234,100
 Al Dente,22222222,4342,500.00
 Frank Enstein,44444444,1010,5250.00
-Iahm Broke,11111111,0,-250
+Iahm Broke,11111111,0,-250.00
