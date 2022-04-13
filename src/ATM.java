@@ -15,15 +15,10 @@ public class ATM {
     public static void start() {
         System.out.println("Good day! Please enter you account details to get started.");
         login();
-        // Once a user logs in, display the welcome message followed by the main menu.
         System.out.println("\nHello, " + currentUser.getFirstName() + "!");
         mainMenu();
-
     }
 
-    /* Retrieve ID and PIN from the user. Validate the account information with the "database".
-     *  If the account is valid, "login" the current user by updating currentUser.
-     *  If the details provided are invalid, prompt the user to re-enter the ID and PIN. */
     public static void login() {
         int accountId = getLoginInput(8);
         int accountPin = getLoginInput(4);
@@ -33,13 +28,10 @@ public class ATM {
             accountId = getLoginInput(8);
             accountPin = getLoginInput(4);
         }
-
         currentUser = accountDatabase.getAccount(accountId);
     }
 
-    /* Retrieves account ID/PIN based on the input length provided.
-     *  If the input length is 8, then prompt the user for an ID.
-     *  If the input length is 4, then prompt the user for a PIN. */
+    // Retrieves account ID/PIN based on the input length provided (8 for ID, 4 for PIN).
     public static int getLoginInput(int inputLength) {
         String inputType = inputLength == 8 ? "ID" : "PIN";
 
@@ -54,28 +46,13 @@ public class ATM {
         return Integer.parseInt(userInput);
     }
 
-    /* Retrieves user input for menu selections and determines whether it is valid.
-     *  If it is valid input, then return the result as an integer. */
-    public static int getUserSelection(int inputLength) {
-        String userSelection = scanner.nextLine();
-
-        while(!isValidInput(userSelection, inputLength)) {
-            System.out.println("Please enter a valid selection.");
-            userSelection = scanner.nextLine();
-        }
-
-        return Integer.parseInt(userSelection);
-    }
-
     public static void logout() {
         System.out.println("\nThank you for using our bank. Have a wonderful day!\n");
         currentUser = null;
         start();
     }
 
-    /* Determines whether the user input is valid based on ID/PIN length.
-     *  IF an ID is valid, it is strictly 8 digits.
-     *  IF a PIN is valid, it is strictly 4 digits. */
+    // Determines whether the user input is valid based on ID/PIN length.
     public static boolean isValidInput(String userInput, int inputLength) {
         String REGEX = "\\d{" + inputLength + "}";
         Pattern pattern = Pattern.compile(REGEX);
@@ -119,8 +96,18 @@ public class ATM {
         }
     }
 
-    /* Asks user for how much they want to deposit, validates their input
-    *  and then deposits the amount into their account. */
+    // Determines if user input is valid then returns it as an integer
+    public static int getUserSelection(int inputLength) {
+        String userSelection = scanner.nextLine();
+
+        while(!isValidInput(userSelection, inputLength)) {
+            System.out.println("Please enter a valid selection.");
+            userSelection = scanner.nextLine();
+        }
+
+        return Integer.parseInt(userSelection);
+    }
+
     public static void deposit() {
         System.out.println("\nDeposit funds into your account.\n");
         System.out.println("How much would you like to deposit?");
@@ -135,10 +122,6 @@ public class ATM {
         accountDatabase.updateDatabase(currentUser.name, currentUser.id, currentUser.pin, currentUser.balance);
         System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.balance.toString());
     }
-
-    /* Asks user for how much they want to withdraw, validates their input
-    *  to ensure they have enough funds in the account to take out the requested
-    *  amount, and if so, takes the funds from their account. */
     public static void withdraw() {
         System.out.println("\nWithdraw funds from your account.\n");
         System.out.println("How much would you like to withdraw?");
@@ -158,9 +141,7 @@ public class ATM {
         System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.balance.toString());
     }
 
-    /* Determines if a requested transaction amount is valid.
-     *  Transactions are limited to anything above $1.00 and under or equal to $1,000 ($0.00 - $1000)
-     *  Cent values are optional... E.G. entering 50 instead of 50.00 is valid. */
+    // Transactions are valid if above $1.00 and under or equal to $1,000 ($0.00 - $1000). Cent values optional.
     public static boolean isValidTransactionAmount(String userTransactionAmount) {
         String REGEX = "^[1-9]$|^[1-9][0-9]{0,2}(?:[.][0-9]{2})?|1000";
         Pattern pattern = Pattern.compile(REGEX);
@@ -174,17 +155,13 @@ public class ATM {
         return matcher.matches();
     }
 
-    /* If the user has enough funds in their account to withdraw the
-     *  amount requested, then it is considered a valid request. */
+    // Determines if the user has enough funds in the account to withdraw requested amount
     public static boolean isValidWithdrawal(String userWithdrawalAmount) {
         BigDecimal requestedWithdrawalAmount = new BigDecimal(userWithdrawalAmount);
         int result = currentUser.balance.compareTo(requestedWithdrawalAmount);
         return result >= 0;
     }
 
-    /* Asks the user if they would like to do anything else after performing an action
-     *  If yes, prompt the user to re-authorize by re-entering their pin.
-     *  Else, log out the user. */
     public static void continuePrompt() {
         System.out.println("\nWould you like to do anything else?\n(1) Yes\n(2) No");
 
@@ -201,9 +178,7 @@ public class ATM {
         }
     }
 
-    /* Re-Authenticate the user if returning to the menu to perform more actions.
-     *  If the user enters the wrong pin, count that towards authentication attempts.
-     *  If the user attempts to enter a pin 3 times, log them out.*/
+    // Re-Authenticate the user if returning to the menu to perform more actions.
     public static void userReAuthentication() {
         System.out.println("\nPlease re-enter your PIN to continue:");
         int accountPin = getLoginInput(4);

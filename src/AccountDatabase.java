@@ -9,9 +9,7 @@ public class AccountDatabase {
     static ArrayList<Account> accounts = new ArrayList<>();
     File database = new File("User_Database.csv");
 
-    /* Generates an ArrayList of all the accounts in the "database"
-     *  Utilizes BufferedReader to scan each line and dynamically create
-     *  an account based off of the data. */
+    // Generates an ArrayList of all the accounts in the "database"
     public AccountDatabase() {
         try {
             String line;
