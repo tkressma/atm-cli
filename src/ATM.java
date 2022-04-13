@@ -144,7 +144,6 @@ public class ATM {
         System.out.println("How much would you like to withdraw?");
         String userWithdrawAmount = scanner.nextLine();
 
-
         while (!isValidTransactionAmount(userWithdrawAmount)) {
             userWithdrawAmount = scanner.nextLine();
             while(!isValidWithdrawal(userWithdrawAmount)) {
@@ -152,8 +151,6 @@ public class ATM {
                 userWithdrawAmount = scanner.nextLine();
             }
         }
-
-
 
         System.out.println("\nWithdrawing " + userWithdrawAmount);
         currentUser.withdrawFunds(new BigDecimal(userWithdrawAmount));
