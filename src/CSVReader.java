@@ -35,4 +35,8 @@ public class CSVReader {
             System.out.println("File not found!");
         }
     }
+
+    public boolean authenticateUser(int id, int pin) {
+        return accounts.stream().anyMatch(account -> account.id == id && account.pin == pin);
+    }
 }
