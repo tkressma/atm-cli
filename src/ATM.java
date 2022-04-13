@@ -71,6 +71,14 @@ public class ATM {
         System.out.println("(3) - Deposit Funds");
         System.out.println("(4) - Exit");
 
+        String userSelection = scanner.nextLine();
+
+        while (!isValidInput(userSelection, 1)) {
+            System.out.println("Please enter a valid selection.");
+            userSelection = scanner.nextLine();
+        }
+
+        System.out.println(userSelection);
     }
 
 
