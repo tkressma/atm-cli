@@ -54,6 +54,19 @@ public class ATM {
         return Integer.parseInt(userInput);
     }
 
+    /* Retrieves user input for menu selections and determines whether it is valid.
+     *  If it is valid input, then return the result as an integer. */
+    public static int getUserSelection(int inputLength) {
+        String userSelection = scanner.nextLine();
+
+        while(!isValidInput(userSelection, inputLength)) {
+            System.out.println("Please enter a valid selection.");
+            userSelection = scanner.nextLine();
+        }
+
+        return Integer.parseInt(userSelection);
+    }
+
     public static void logout() {
         System.out.println("\nThank you for using our bank. Have a wonderful day!\n");
         currentUser = null;
@@ -78,14 +91,9 @@ public class ATM {
         System.out.println("(3) - Deposit Funds");
         System.out.println("(4) - Exit");
 
-        String userSelection = scanner.nextLine();
+        int userSelection = getUserSelection(1);
 
-        while (!isValidInput(userSelection, 1)) {
-            System.out.println("\nPlease enter a valid selection.");
-            userSelection = scanner.nextLine();
-        }
-
-        switch(Integer.parseInt(userSelection)) {
+        switch(userSelection) {
             case 1:
                 System.out.println("\nAccount Balance\nYour balance is: " + currentUser.getAccountBalance());
                 continuePrompt();
@@ -151,13 +159,9 @@ public class ATM {
     public static void continuePrompt() {
         System.out.println("\nWould you like to do anything else?\n(1) Yes\n(2) No");
 
-        String userSelection = scanner.nextLine();
-        while (!isValidInput(userSelection, 1)) {
-            System.out.println("\nPlease enter a valid selection.");
-            userSelection = scanner.nextLine();
-        }
+        int userSelection = getUserSelection(1);
 
-        switch(Integer.parseInt(userSelection)) {
+        switch(userSelection) {
             case 1:
                 userReAuthentication();
             case 2:
