@@ -108,11 +108,24 @@ public class ATM {
         String userDepositAmount = scanner.nextLine();
 
         while (!isValidTransactionAmount(userDepositAmount)) {
-            System.out.println("Please enter a valid deposit amount");
+            System.out.println("Please enter a valid amount.");
             userDepositAmount = scanner.nextLine();
         }
 
         System.out.println("Depositing " + userDepositAmount);
+    }
+
+    public static void withdraw() {
+        System.out.println("\nWithdraw funds from your account.\n");
+        System.out.println("How much would you like to withdraw?");
+        String userWithdrawAmount = scanner.nextLine();
+
+        while (!isValidTransactionAmount(userWithdrawAmount)) {
+            System.out.println("Please enter a valid amount.");
+            userWithdrawAmount = scanner.nextLine();
+        }
+
+        System.out.println("Withdrawing " + userWithdrawAmount);
     }
 
     // Validate the input so that users can only deposit/withdraw from $1 up to $1000
