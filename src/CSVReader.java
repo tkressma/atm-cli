@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class CSVReader {
     static ArrayList<Account> accounts = new ArrayList<>();
-    File database = new File("User_Database");
+    File database = new File("User_Database.csv");
 
     public CSVReader() {
         try {
@@ -21,6 +21,7 @@ public class CSVReader {
                 int acctPin = Integer.parseInt(accountDetails[2]);
                 BigDecimal acctBalance = new BigDecimal(accountDetails[3]);
 
+                System.out.println(acctPin);
                 accounts.add(new Account(acctName, acctId, acctPin, acctBalance));
             }
         } catch (Exception e) {
