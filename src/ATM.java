@@ -14,6 +14,10 @@ public class ATM {
     public static void start() {
         System.out.println("Good day! Please enter you account details to get started.");
         login();
+        // Once a user logs in, display the welcome message followed by the main menu.
+        System.out.println("\nHello, " + currentUser.getFirstName() + "!");
+        // mainMenu();
+
     }
 
     /* Retrieve ID and PIN from the user. Validate the account information with the "database".

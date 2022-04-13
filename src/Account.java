@@ -12,4 +12,8 @@ public class Account {
         this.pin = acctPin;
         this.balance = acctBalance;
     }
+
+    public String getFirstName() {
+        return this.name.split(" ")[0];
+    }
 }
