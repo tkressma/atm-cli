@@ -23,8 +23,8 @@ Implement an interface to an ATM in which the following use cases are accounted 
 - Account Class
   - Used to create Account objects, which contain all the data about the user account:
     - String acctName
-    - int acctPin
-    - int acctId
+    - int acctPin (strictly 8 digits)
+    - int acctId (strictly 4 digits)
     - BigDecimal acctBalance
 - AccountDatabase Class
   - Initially scans through the User_Database.csv file to retrieve all Accounts.
@@ -45,3 +45,24 @@ Below is the first user:
 | AcctName   | AcctId     | AcctPin    | AcctBalance |
 |------------|------------|------------|-------------|
 | Bill Dollar | 55555555   | 1234       | 100.00     |
+
+Upon running the program, you will be prompted to enter and ID. 
+
+Using the data above, you should enter
+"55555555", followed by the correct pin, "1234" to gain access to the ATM menu.
+
+## Test Cases
+- For any user input:
+  - "test test test test" (or any string)
+  - 1.0429
+  - 0.99 / 0.00 / 0.1583
+  - 1001.5093 / 1000.01
+- The user found in User_Database.csv was created to test against overdrawn accounts:
+
+| AcctName   | AcctId     | AcctPin | AcctBalance |
+|------------|------------|---------|-------------|
+| Iahm Broke | 11111111   | 0000    | -250.00     |
+
+## Current known bugs (WIP)
+- Currently, if the users balance falls below $1, but is greater than $0, the user will not be able to leave the withdraw menu. This is because a withdrawal requires a minimum of $1.
+- If any other bugs are found, I'd love to talk about it!
