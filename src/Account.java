@@ -22,10 +22,10 @@ public class Account {
     }
 
     public void depositFunds(BigDecimal deposit) {
-        this.balance.add(deposit);
+        this.balance = this.balance.add(deposit);
     }
 
     public void withdrawFunds(BigDecimal withdrawal) {
-        this.balance.add(withdrawal);
+        this.balance = this.balance.subtract(withdrawal);
     }
 }
