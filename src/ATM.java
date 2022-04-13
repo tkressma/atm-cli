@@ -92,7 +92,7 @@ public class ATM {
                 System.out.println("Withdraw");
                 break;
             case 3:
-                System.out.println("Deposit");
+                deposit();
                 break;
             case 4:
                 logout();
@@ -100,6 +100,14 @@ public class ATM {
                 System.out.println("\nPlease enter a valid selection");
                 mainMenu();
         }
+    }
+
+    public static void deposit() {
+        System.out.println("\nDeposit funds into your account.\n");
+        System.out.println("How much would you like to deposit?");
+        String userDepositAmount = scanner.nextLine();
+
+        System.out.println("Depositing " + userDepositAmount);
     }
 
 
