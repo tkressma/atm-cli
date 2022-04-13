@@ -138,6 +138,11 @@ public class ATM {
             userWithdrawAmount = scanner.nextLine();
         }
 
+        while(!isValidWithdrawal(userWithdrawAmount)) {
+            System.out.printf("You do not have enough funds in your account to withdraw that amount. Please enter another number: ");
+            userWithdrawAmount = scanner.nextLine();
+        }
+
         System.out.println("\nWithdrawing " + userWithdrawAmount);
         currentUser.withdrawFunds(new BigDecimal(userWithdrawAmount));
     }
@@ -151,6 +156,14 @@ public class ATM {
         Matcher matcher = pattern.matcher(userTransactionAmount);
 
         return matcher.matches();
+    }
+
+    /* If the user has enough funds in their account to withdraw the
+     *  amount requested, then it is considered a valid request. */
+    public static boolean isValidWithdrawal(String userWithdrawalAmount) {
+        BigDecimal requestedWithdrawalAmount = new BigDecimal(userWithdrawalAmount);
+        int result = currentUser.balance.compareTo(requestedWithdrawalAmount);
+        return result >= 0;
     }
 
     /* Asks the user if they would like to do anything else after performing an action
