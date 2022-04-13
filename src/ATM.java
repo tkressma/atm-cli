@@ -140,6 +140,9 @@ public class ATM {
         return matcher.matches();
     }
 
+    /* Asks the user if they would like to do anything else after performing an action
+     *  If yes, prompt the user to re-authorize by re-entering their pin.
+     *  Else, log out the user. */
     public static void continuePrompt() {
         System.out.println("\nWould you like to do anything else?\n(1) Yes\n(2) No");
 
@@ -151,14 +154,31 @@ public class ATM {
 
         switch(Integer.parseInt(userSelection)) {
             case 1:
-                // Re authenticate user;
+                userReAuthentication();
             case 2:
                 logout();
             default:
                 System.out.println("Please enter a valid selection.");
                 continuePrompt();
         }
+    }
 
+    /* Re-Authenticate the user if returning to the menu to perform more actions.
+     *  If the user enters the wrong pin, count that towards authentication attempts.
+     *  If the user attempts to enter a pin 3 times, log them out.*/
+    public static void userReAuthentication() {
+        System.out.println("\nPlease re-enter your PIN to continue:");
+        int accountPin = getLoginInput(4);
+        int attempts = 0;
+
+        while (accountPin != currentUser.pin) {
+            attempts++;
+            if (attempts == 3) logout();
+            System.out.println("\nIncorrect PIN. Please re-enter your pin to continue:");
+            accountPin = getLoginInput(4);
+        }
+
+        mainMenu();
     }
 
 
