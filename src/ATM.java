@@ -49,6 +49,9 @@ public class ATM {
         return Integer.parseInt(userInput);
     }
 
+    /* Determines whether the user input is valid based on ID/PIN length.
+     *  IF an ID is valid, it is strictly 8 digits.
+     *  IF a PIN is valid, it is strictly 4 digits. */
     public static boolean isValidInput(String userInput, int inputLength) {
         String REGEX = "\\d{" + inputLength + "}";
         Pattern pattern = Pattern.compile(REGEX);
