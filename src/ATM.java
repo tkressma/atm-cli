@@ -33,7 +33,6 @@ public class ATM {
         currentUser = accountDatabase.getAccount(accountId);
     }
 
-    // Retrieves account ID/PIN based on the input length provided (8 for ID, 4 for PIN).
     private static int getLoginInput(int inputLength) {
         String inputType = inputLength == ID_LENGTH ? "ID" : "PIN";
 
@@ -151,18 +150,19 @@ public class ATM {
     }
 
     // Transactions are valid if above $1.00 and under or equal to $1,000 ($0.00 - $1000). Cent values optional.
-    // CHECK IF VALUE IS EMPTY
-    private static boolean isValidTransactionAmount(String userTransactionAmount) {
-        String REGEX = "^[1-9]$|^[1-9][0-9]{0,2}(?:[.][0-9]{2})?|1000";
+    // This is public for the JUnit test.
+    public static boolean isValidTransactionAmount(String userTransactionAmount) {
+        String REGEX = "^[1-9]$|^[1-9][0-9]{0,2}(?:[.][0-9]{2})?|1000|1000.00";
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(userTransactionAmount);
 
-        if (matcher.matches() == false) {
+        if (!matcher.matches()) {
             System.out.printf("Please enter a valid deposit amount. ");
             System.out.println("All transactions are limited to anything above $1.00 and under $1,000.");
+            return false;
         }
 
-        return matcher.matches();
+        return true;
     }
 
     // Determines if the user has enough funds in the account to withdraw requested amount
@@ -188,7 +188,6 @@ public class ATM {
         }
     }
 
-    // Re-Authenticate the user if returning to the menu to perform more actions.
     private static void userReAuthentication() {
         System.out.println("\nPlease re-enter your PIN to continue:");
         int accountPin = getLoginInput(PIN_LENGTH);
@@ -203,6 +202,4 @@ public class ATM {
 
         mainMenu();
     }
-
-
 }

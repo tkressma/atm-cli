@@ -10,9 +10,6 @@ public class AccountDatabase {
     File database = new File("User_Database.csv");
 
     // Generates an ArrayList of all the accounts in the "database"
-    // Thinking about this, I could have searched for the exact Account ID,
-    // similar to what I did in the updateDatabase function, instead of
-    // storing each individual account in an arraylist. This is certaintly not scalable.
     public AccountDatabase() {
         try {
             String line;
