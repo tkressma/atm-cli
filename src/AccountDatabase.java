@@ -67,10 +67,10 @@ public class AccountDatabase {
     }
 
     public boolean authenticateUser(int id, int pin) {
-        return accounts.stream().anyMatch(account -> account.id == id && account.pin == pin);
+        return accounts.stream().anyMatch(account -> account.accountId == id && account.accountPin == pin);
     }
 
     public Account getAccount(int id) {
-        return accounts.stream().filter(account -> account.id == id).findFirst().orElse(null);
+        return accounts.stream().filter(account -> account.accountId == id).findFirst().orElse(null);
     }
 }

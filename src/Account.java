@@ -1,31 +1,31 @@
 import java.math.BigDecimal;
 
 public class Account {
-    String name;
-    int id;
-    int pin;
-    BigDecimal balance;
+    String accountName;
+    int accountId;
+    int accountPin;
+    BigDecimal accountBalance;
 
     public Account(String acctName, int acctId, int acctPin, BigDecimal acctBalance) {
-        this.name = acctName;
-        this.id = acctId;
-        this.pin = acctPin;
-        this.balance = acctBalance;
+        this.accountName = acctName;
+        this.accountId = acctId;
+        this.accountPin = acctPin;
+        this.accountBalance = acctBalance;
     }
 
-    public String getFirstName() {
-        return this.name.split(" ")[0];
+    public String getAccountFirstName() {
+        return this.accountName.split(" ")[0];
     }
 
     public BigDecimal getAccountBalance() {
-        return this.balance;
+        return this.accountBalance;
     }
 
     public void depositFunds(BigDecimal deposit) {
-        this.balance = this.balance.add(deposit);
+        this.accountBalance = this.accountBalance.add(deposit);
     }
 
     public void withdrawFunds(BigDecimal withdrawal) {
-        this.balance = this.balance.subtract(withdrawal);
+        this.accountBalance = this.accountBalance.subtract(withdrawal);
     }
 }

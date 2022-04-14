@@ -15,7 +15,7 @@ public class ATM {
     public static void start() {
         System.out.println("Good day! Please enter you account details to get started.");
         login();
-        System.out.println("\nHello, " + currentUser.getFirstName() + "!");
+        System.out.println("\nHello, " + currentUser.getAccountFirstName() + "!");
         mainMenu();
     }
 
@@ -75,11 +75,11 @@ public class ATM {
                 System.out.println("\nAccount Balance\nYour balance is: $" + currentUser.getAccountBalance());
                 continuePrompt();
             case 2:
-                if (currentUser.balance.compareTo(new BigDecimal(0)) == -1) {
+                if (currentUser.accountBalance.compareTo(new BigDecimal(0)) == -1) {
                     System.out.println("\nYour account is overdrawn. You cannot withdraw funds at this time.");
                     System.out.println("\nReturning to main menu...");
                     mainMenu();
-                } else if (currentUser.balance.equals(new BigDecimal(0))) {
+                } else if (currentUser.accountBalance.equals(new BigDecimal(0))) {
                     System.out.println("\nYour current balance is $0. You cannot withdraw funds at this time.");
                     mainMenu();
                 }
@@ -119,8 +119,8 @@ public class ATM {
 
         System.out.println("\nDepositing " + userDepositAmount);
         currentUser.depositFunds(new BigDecimal(userDepositAmount));
-        accountDatabase.updateDatabase(currentUser.name, currentUser.id, currentUser.pin, currentUser.balance);
-        System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.balance.toString());
+        accountDatabase.updateDatabase(currentUser.accountName, currentUser.accountId, currentUser.accountPin, currentUser.accountBalance);
+        System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.accountBalance.toString());
     }
     public static void withdraw() {
         System.out.println("\nWithdraw funds from your account.\n");
@@ -137,8 +137,8 @@ public class ATM {
 
         System.out.println("\nWithdrawing " + userWithdrawAmount);
         currentUser.withdrawFunds(new BigDecimal(userWithdrawAmount));
-        accountDatabase.updateDatabase(currentUser.name, currentUser.id, currentUser.pin, currentUser.balance);
-        System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.balance.toString());
+        accountDatabase.updateDatabase(currentUser.accountName, currentUser.accountId, currentUser.accountPin, currentUser.accountBalance);
+        System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.accountBalance.toString());
     }
 
     // Transactions are valid if above $1.00 and under or equal to $1,000 ($0.00 - $1000). Cent values optional.
@@ -158,7 +158,7 @@ public class ATM {
     // Determines if the user has enough funds in the account to withdraw requested amount
     public static boolean isValidWithdrawal(String userWithdrawalAmount) {
         BigDecimal requestedWithdrawalAmount = new BigDecimal(userWithdrawalAmount);
-        int result = currentUser.balance.compareTo(requestedWithdrawalAmount);
+        int result = currentUser.accountBalance.compareTo(requestedWithdrawalAmount);
         return result >= 0;
     }
 
@@ -184,7 +184,7 @@ public class ATM {
         int accountPin = getLoginInput(4);
         int attempts = 0;
 
-        while (accountPin != currentUser.pin) {
+        while (accountPin != currentUser.accountPin) {
             attempts++;
             if (attempts == 3) logout();
             System.out.println("\nIncorrect PIN. Please re-enter your pin to continue:");
