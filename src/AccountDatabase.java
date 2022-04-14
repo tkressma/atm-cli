@@ -36,7 +36,7 @@ public class AccountDatabase {
     }
 
     /* Searches for the line with the current users ID, then proceeds to
-    *  overwrite the line with the newly updated user data. */
+     *  overwrite the line with the newly updated user data. */
     public void updateDatabase(Account currentUser) {
         try {
             String line;
@@ -48,7 +48,7 @@ public class AccountDatabase {
             int accountPin = currentUser.accountPin;
             BigDecimal accountBalance = currentUser.accountBalance;
 
-            String updatedAccountRecord = accountName +","+ accountId +"," + accountPin + "," + accountBalance;
+            String updatedAccountRecord = accountName + "," + accountId + "," + accountPin + "," + accountBalance;
 
             while ((line = reader.readLine()) != null) {
                 if (line.contains(String.format("%d", accountId))) {

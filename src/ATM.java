@@ -35,7 +35,8 @@ public class ATM {
     public static int getLoginInput(int inputLength) {
         String inputType = inputLength == 8 ? "ID" : "PIN";
 
-        System.out.printf("Enter your %s: ", inputType);;
+        System.out.printf("Enter your %s: ", inputType);
+        ;
         String userInput = scanner.nextLine();
 
         while (!isValidInput(userInput, inputLength)) {
@@ -70,7 +71,7 @@ public class ATM {
 
         int userSelection = getUserSelection(1);
 
-        switch(userSelection) {
+        switch (userSelection) {
             case 1:
                 System.out.println("\nAccount Balance\nYour balance is: $" + currentUser.getAccountBalance());
                 continuePrompt();
@@ -92,7 +93,7 @@ public class ATM {
     public static int getUserSelection(int inputLength) {
         String userSelection = scanner.nextLine();
 
-        while(!isValidInput(userSelection, inputLength)) {
+        while (!isValidInput(userSelection, inputLength)) {
             System.out.println("Please enter a valid selection.");
             userSelection = scanner.nextLine();
         }
@@ -111,6 +112,7 @@ public class ATM {
 
         finalizeTransaction("deposit", userDepositAmount);
     }
+
     public static void withdraw() {
         if (currentUser.accountBalance.compareTo(new BigDecimal(0.99)) <= 0) {
             System.out.println("\nYour account balance does not allow you to withdraw funds at this time.\nReturning to main menu...");
@@ -123,7 +125,7 @@ public class ATM {
 
         while (!isValidTransactionAmount(userWithdrawAmount)) {
             userWithdrawAmount = scanner.nextLine();
-            while(!isValidWithdrawal(userWithdrawAmount)) {
+            while (!isValidWithdrawal(userWithdrawAmount)) {
                 System.out.printf("You do not have enough funds in your account to withdraw that amount. Please enter another number: ");
                 userWithdrawAmount = scanner.nextLine();
             }
@@ -171,7 +173,7 @@ public class ATM {
 
         int userSelection = getUserSelection(1);
 
-        switch(userSelection) {
+        switch (userSelection) {
             case 1:
                 userReAuthentication();
             case 2:
