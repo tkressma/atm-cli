@@ -64,5 +64,5 @@ Using the data above, you should enter
 | Iahm Broke | 11111111   | 0000    | -250.00     |
 
 ## Current known bugs (WIP)
-- Currently, if the users balance falls below $1, but is greater than $0, the user will not be able to leave the withdraw menu. This is because a withdrawal requires a minimum of $1.
+- Currently, if the users balance falls below $1, but is greater than $0, the user will not be able to leave the withdraw menu. This is because a withdrawal requires a minimum of $1. **Resolved**
 - If any other bugs are found, I'd love to talk about it!
