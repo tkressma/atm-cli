@@ -112,11 +112,8 @@ public class ATM {
         finalizeTransaction("deposit", userDepositAmount);
     }
     public static void withdraw() {
-        if (currentUser.accountBalance.compareTo(new BigDecimal(0)) == -1) {
-            System.out.println("\nYour account is overdrawn; you cannot withdraw funds at this time.\nReturning to main menu...");
-            mainMenu();
-        } else if (currentUser.accountBalance.equals(new BigDecimal(0))) {
-            System.out.println("\nYour current balance is $0. You cannot withdraw funds at this time.");
+        if (currentUser.accountBalance.compareTo(new BigDecimal(0.99)) <= 0) {
+            System.out.println("\nYour account balance does not allow you to withdraw funds at this time.\nReturning to main menu...");
             mainMenu();
         }
 
@@ -136,7 +133,7 @@ public class ATM {
     }
 
     public static void finalizeTransaction(String transactionType, String transactionAmount) {
-        System.out.printf("\n%s %d...", transactionType.equals("deposit") ? "Depositing" : "Withdrawing", transactionAmount);
+        System.out.printf("\n%s %s...", transactionType.equals("deposit") ? "Depositing" : "Withdrawing", transactionAmount);
 
         if (transactionType.equals("deposit")) {
             currentUser.depositFunds(new BigDecimal(transactionAmount));
