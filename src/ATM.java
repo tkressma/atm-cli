@@ -125,12 +125,13 @@ public class ATM {
         System.out.println("How much would you like to withdraw?");
         String userWithdrawAmount = scanner.nextLine();
 
-        while (!isValidTransactionAmount(userWithdrawAmount) && userWithdrawAmount.isEmpty()) {
+        while (!isValidTransactionAmount(userWithdrawAmount)) {
             userWithdrawAmount = scanner.nextLine();
-            while (!isValidWithdrawal(userWithdrawAmount)) {
-                System.out.printf("You do not have enough funds in your account to withdraw that amount. Please enter another number: ");
-                userWithdrawAmount = scanner.nextLine();
-            }
+        }
+
+        while (!isValidWithdrawal(userWithdrawAmount)) {
+            System.out.printf("You do not have enough funds in your account to withdraw that amount. Please enter another number: ");
+            userWithdrawAmount = scanner.nextLine();
         }
 
         finalizeTransaction("withdraw", userWithdrawAmount);
