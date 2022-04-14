@@ -117,10 +117,7 @@ public class ATM {
             userDepositAmount = scanner.nextLine();
         }
 
-        System.out.println("\nDepositing " + userDepositAmount);
-        currentUser.depositFunds(new BigDecimal(userDepositAmount));
-        accountDatabase.updateDatabase(currentUser);
-        System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.accountBalance.toString());
+        finalizeTransaction("deposit", userDepositAmount);
     }
     public static void withdraw() {
         System.out.println("\nWithdraw funds from your account.\n");
@@ -135,8 +132,18 @@ public class ATM {
             }
         }
 
-        System.out.println("\nWithdrawing " + userWithdrawAmount);
-        currentUser.withdrawFunds(new BigDecimal(userWithdrawAmount));
+        finalizeTransaction("withdraw", userWithdrawAmount);
+    }
+
+    public static void finalizeTransaction(String transactionType, String transactionAmount) {
+        System.out.printf("\n%s %d...", transactionType.equals("deposit") ? "Depositing" : "Withdrawing", transactionAmount);
+
+        if (transactionType.equals("deposit")) {
+            currentUser.depositFunds(new BigDecimal(transactionAmount));
+        } else {
+            currentUser.withdrawFunds(new BigDecimal(transactionAmount));
+        }
+
         accountDatabase.updateDatabase(currentUser);
         System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.accountBalance.toString());
     }
