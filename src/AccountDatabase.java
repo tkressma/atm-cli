@@ -59,23 +59,22 @@ public class AccountDatabase {
                     inputBuffer.append('\n');
                 }
             }
-            reader.close();
 
+            reader.close();
             FileOutputStream updatedDatabase = new FileOutputStream("User_Database.csv");
             updatedDatabase.write(inputBuffer.toString().getBytes());
             updatedDatabase.close();
-
         } catch (Exception e) {
             System.out.println(e);
         }
 
     }
 
-    public boolean authenticateUser(int id, int pin) {
-        return accounts.stream().anyMatch(account -> account.accountId == id && account.accountPin == pin);
+    public boolean authenticateUser(int accountId, int accountPin) {
+        return accounts.stream().anyMatch(account -> account.accountId == accountId && account.accountPin == accountPin);
     }
 
-    public Account getAccount(int id) {
-        return accounts.stream().filter(account -> account.accountId == id).findFirst().orElse(null);
+    public Account getAccount(int accountId) {
+        return accounts.stream().filter(account -> account.accountId == accountId).findFirst().orElse(null);
     }
 }
