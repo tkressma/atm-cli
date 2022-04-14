@@ -119,7 +119,7 @@ public class ATM {
 
         System.out.println("\nDepositing " + userDepositAmount);
         currentUser.depositFunds(new BigDecimal(userDepositAmount));
-        accountDatabase.updateDatabase(currentUser.accountName, currentUser.accountId, currentUser.accountPin, currentUser.accountBalance);
+        accountDatabase.updateDatabase(currentUser);
         System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.accountBalance.toString());
     }
     public static void withdraw() {
@@ -137,7 +137,7 @@ public class ATM {
 
         System.out.println("\nWithdrawing " + userWithdrawAmount);
         currentUser.withdrawFunds(new BigDecimal(userWithdrawAmount));
-        accountDatabase.updateDatabase(currentUser.accountName, currentUser.accountId, currentUser.accountPin, currentUser.accountBalance);
+        accountDatabase.updateDatabase(currentUser);
         System.out.printf("\nTransaction Complete. Your new balance is %s \n", currentUser.accountBalance.toString());
     }
 
