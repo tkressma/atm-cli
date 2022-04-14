@@ -75,14 +75,6 @@ public class ATM {
                 System.out.println("\nAccount Balance\nYour balance is: $" + currentUser.getAccountBalance());
                 continuePrompt();
             case 2:
-                if (currentUser.accountBalance.compareTo(new BigDecimal(0)) == -1) {
-                    System.out.println("\nYour account is overdrawn. You cannot withdraw funds at this time.");
-                    System.out.println("\nReturning to main menu...");
-                    mainMenu();
-                } else if (currentUser.accountBalance.equals(new BigDecimal(0))) {
-                    System.out.println("\nYour current balance is $0. You cannot withdraw funds at this time.");
-                    mainMenu();
-                }
                 withdraw();
                 continuePrompt();
             case 3:
@@ -120,6 +112,14 @@ public class ATM {
         finalizeTransaction("deposit", userDepositAmount);
     }
     public static void withdraw() {
+        if (currentUser.accountBalance.compareTo(new BigDecimal(0)) == -1) {
+            System.out.println("\nYour account is overdrawn; you cannot withdraw funds at this time.\nReturning to main menu...");
+            mainMenu();
+        } else if (currentUser.accountBalance.equals(new BigDecimal(0))) {
+            System.out.println("\nYour current balance is $0. You cannot withdraw funds at this time.");
+            mainMenu();
+        }
+
         System.out.println("\nWithdraw funds from your account.\n");
         System.out.println("How much would you like to withdraw?");
         String userWithdrawAmount = scanner.nextLine();
