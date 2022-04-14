@@ -7,8 +7,8 @@ public class ATM {
     private static AccountDatabase accountDatabase = new AccountDatabase();
     private static Scanner scanner = new Scanner(System.in);
     private static Account currentUser;
-    static final int PIN_LENGTH = 8;
-    static final int ID_LENGTH = 4;
+    static final int PIN_LENGTH = 4;
+    static final int ID_LENGTH = 8;
 
     public static void main(String[] args) {
         start();
@@ -38,7 +38,7 @@ public class ATM {
         String inputType = inputLength == ID_LENGTH ? "ID" : "PIN";
 
         System.out.printf("Enter your %s: ", inputType);
-        ;
+
         String userInput = scanner.nextLine();
 
         while (!isValidInput(userInput, inputLength)) {
