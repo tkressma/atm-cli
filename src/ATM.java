@@ -14,14 +14,14 @@ public class ATM {
         start();
     }
 
-    public static void start() {
+    private static void start() {
         System.out.println("Good day! Please enter you account details to get started.");
         login();
         System.out.println("\nHello, " + currentUser.getAccountFirstName() + "!");
         mainMenu();
     }
 
-    public static void login() {
+    private static void login() {
         int accountId = getLoginInput(ID_LENGTH);
         int accountPin = getLoginInput(PIN_LENGTH);
 
@@ -34,7 +34,7 @@ public class ATM {
     }
 
     // Retrieves account ID/PIN based on the input length provided (8 for ID, 4 for PIN).
-    public static int getLoginInput(int inputLength) {
+    private static int getLoginInput(int inputLength) {
         String inputType = inputLength == ID_LENGTH ? "ID" : "PIN";
 
         System.out.printf("Enter your %s: ", inputType);
@@ -49,14 +49,14 @@ public class ATM {
         return Integer.parseInt(userInput);
     }
 
-    public static void logout() {
+    private static void logout() {
         System.out.println("\nThank you for using our bank. Have a wonderful day!\n");
         currentUser = null;
         start();
     }
 
     // Determines whether the user input is valid based on ID/PIN length.
-    public static boolean isValidInput(String userInput, int inputLength) {
+    private static boolean isValidInput(String userInput, int inputLength) {
         String REGEX = "\\d{" + inputLength + "}";
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(userInput);
@@ -64,7 +64,7 @@ public class ATM {
         return matcher.matches();
     }
 
-    public static void mainMenu() {
+    private static void mainMenu() {
         System.out.println("\nEnter the number relating to the selection you would like to make:");
         System.out.println("(1) - View Balance");
         System.out.println("(2) - Withdraw Funds");
@@ -92,7 +92,7 @@ public class ATM {
     }
 
     // Determines if user input is valid then returns it as an integer
-    public static int getUserSelection(int inputLength) {
+    private static int getUserSelection(int inputLength) {
         String userSelection = scanner.nextLine();
 
         while (!isValidInput(userSelection, inputLength)) {
@@ -103,7 +103,7 @@ public class ATM {
         return Integer.parseInt(userSelection);
     }
 
-    public static void deposit() {
+    private static void deposit() {
         System.out.println("\nDeposit funds into your account.\n");
         System.out.println("How much would you like to deposit?");
         String userDepositAmount = scanner.nextLine();
@@ -115,7 +115,7 @@ public class ATM {
         finalizeTransaction("deposit", userDepositAmount);
     }
 
-    public static void withdraw() {
+    private static void withdraw() {
         if (currentUser.accountBalance.compareTo(new BigDecimal(0.99)) <= 0) {
             System.out.println("\nYour account balance does not allow you to withdraw funds at this time.\nReturning to main menu...");
             mainMenu();
@@ -125,7 +125,7 @@ public class ATM {
         System.out.println("How much would you like to withdraw?");
         String userWithdrawAmount = scanner.nextLine();
 
-        while (!isValidTransactionAmount(userWithdrawAmount)) {
+        while (!isValidTransactionAmount(userWithdrawAmount) && userWithdrawAmount.isEmpty()) {
             userWithdrawAmount = scanner.nextLine();
             while (!isValidWithdrawal(userWithdrawAmount)) {
                 System.out.printf("You do not have enough funds in your account to withdraw that amount. Please enter another number: ");
@@ -136,7 +136,7 @@ public class ATM {
         finalizeTransaction("withdraw", userWithdrawAmount);
     }
 
-    public static void finalizeTransaction(String transactionType, String transactionAmount) {
+    private static void finalizeTransaction(String transactionType, String transactionAmount) {
         System.out.printf("\n%s %s...", transactionType.equals("deposit") ? "Depositing" : "Withdrawing", transactionAmount);
 
         if (transactionType.equals("deposit")) {
@@ -150,7 +150,8 @@ public class ATM {
     }
 
     // Transactions are valid if above $1.00 and under or equal to $1,000 ($0.00 - $1000). Cent values optional.
-    public static boolean isValidTransactionAmount(String userTransactionAmount) {
+    // CHECK IF VALUE IS EMPTY
+    private static boolean isValidTransactionAmount(String userTransactionAmount) {
         String REGEX = "^[1-9]$|^[1-9][0-9]{0,2}(?:[.][0-9]{2})?|1000";
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(userTransactionAmount);
@@ -164,13 +165,13 @@ public class ATM {
     }
 
     // Determines if the user has enough funds in the account to withdraw requested amount
-    public static boolean isValidWithdrawal(String userWithdrawalAmount) {
+    private static boolean isValidWithdrawal(String userWithdrawalAmount) {
         BigDecimal requestedWithdrawalAmount = new BigDecimal(userWithdrawalAmount);
         int result = currentUser.accountBalance.compareTo(requestedWithdrawalAmount);
         return result >= 0;
     }
 
-    public static void continuePrompt() {
+    private static void continuePrompt() {
         System.out.println("\nWould you like to do anything else?\n(1) Yes\n(2) No");
 
         int userSelection = getUserSelection(1);
@@ -187,7 +188,7 @@ public class ATM {
     }
 
     // Re-Authenticate the user if returning to the menu to perform more actions.
-    public static void userReAuthentication() {
+    private static void userReAuthentication() {
         System.out.println("\nPlease re-enter your PIN to continue:");
         int accountPin = getLoginInput(PIN_LENGTH);
         int attempts = 0;
