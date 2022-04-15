@@ -4,7 +4,7 @@
 
 Implement an interface to an ATM in which the following use cases are accounted for:
 
-- A customer can login to the ATM account by providing a 4-digit PIN number
+- A customer can log in to the ATM account by providing a 4-digit PIN
 - A customer can view their current balance
 - A customer can deposit money
 - A customer can withdraw money
@@ -64,12 +64,16 @@ Using the data above, you should enter
 
 ## Test Cases
 
-- For any user input:
-    - "test test test test" (or any string)
-    - "" (empty string)
-    - 1.0429
-    - 0.99 / 0.00 / 0.1583
-    - 1001.5093 / 1000.01
+- A JUnit test is included. `/test/ATMTransactionInputTest`
+    - Failed cases:
+        - Empty strings
+        - Non-digit inputs
+        - Negative numbers
+        - Numbers with more than 3 digits after the decimal
+    - Successful cases:
+        - Numbers between 1 and 1000 (or 1.00 and 1000.00) that do not have more than 2 digits after the decimal.
+            - For example, 1000.00 is valid, but 1000.000 is not.
+
 - The user found in User_Database.csv was created to test against overdrawn accounts:
 
 | AcctName   | AcctId     | AcctPin | AcctBalance |
@@ -79,5 +83,5 @@ Using the data above, you should enter
 ## Current known bugs (WIP)
 
 - Currently, if the users balance falls below $1, but is greater than $0, the user will not be able to leave the
-  withdraw menu. This is because a withdrawal requires a minimum of $1. **Resolved**
+  withdrawal menu. This is because a withdrawal requires a minimum of $1. **Resolved**
 - If any other bugs are found, I'd love to talk about it!
